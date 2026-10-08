@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Super Divertido ⚡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fundo: #0d1117;
+            --card-bg: #161b22;
+            --rosa-neon: #ff2a85;
+            --azul-neon: #00f0ff;
+            --verde-neon: #00ff85;
+            --amarelo-neon: #ffdd00;
+            --roxo-card: #21262d;
+        }
+
+        body {
+            font-family: 'Fredoka', cursive, sans-serif;
+            background-color: var(--fundo);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 42, 133, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.15) 0%, transparent 40%);
+            min-height: 100vh;
+        }
+
+        .fonte-codigo {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Efeito de balanço no cadeado */
+        @keyframes float-wiggle {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        .cadeado-animado {
+            animation: float-wiggle 3s ease-in-out infinite;
+        }
+
+        .btn-press {
+            transition: all 0.1s ease;
+            box-shadow: 0 5px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-press:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Custom Checkbox */
+        .checkbox-custom {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #30363d;
+            border-radius: 8px;
+            background-color: #0d1117;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-custom:checked {
+            background-color: var(--rosa-neon);
+            border-color: var(--rosa-neon);
+            box-shadow: 0 0 10px rgba(255, 42, 133, 0.5);
+        }
+
+        .checkbox-custom:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Barra de força da senha */
+        .barra {
+            background-color: #21262d;
+            height: 18px;
+            border-radius: 999px;
+            overflow: hidden;
+            border: 2px solid #30363d;
+        }
+
+        .forca {
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
+            border-radius: 999px;
+        }
+
+        .fraca {
+            width: 33%;
+            background-color: #ff4757;
+            box-shadow: 0 0 12px rgba(255, 71, 87, 0.7);
+        }
+
+        .media {
+            width: 66%;
+            background-color: var(--amarelo-neon);
+            box-shadow: 0 0 12px rgba(255, 221, 0, 0.7);
+        }
+
+        .forte {
+            width: 100%;
+            background-color: var(--verde-neon);
+            box-shadow: 0 0 12px rgba(0, 255, 133, 0.7);
+        }
+    </style>
+</head>
+<body class="text-white flex items-center justify-center p-4 min-h-screen">
+
+    <section class="conteudo w-full max-w-4xl bg-[#161b22] border-4 border-[#30363d] rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+        
+        <!-- Decoração Cyberpunk superior -->
+        <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-500 via-cyan-400 to-green-400"></div>
+
+        <!-- Título e Ícone Animado -->
+        <div class="conteudo-titulo text-center mb-8">
+            <div class="inline-block text-6xl md:text-7xl mb-2 cadeado-animado filter drop-shadow-[0_0_15px_rgba(255,42,133,0.5)]">
+                🔐
+            </div>
+            <h2 class="titulo-principal text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-500 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                Gerador de Senhas
+            </h2>
+            <h3 class="titulo-secundario text-gray-400 text-lg md:text-xl mt-1">
+                Gere senhas super aleatórias, divertidas e inquebráveis! 🚀
+            </h3>
+        </div>
+
+        <!-- Campo da Senha Gerada -->
+        <div class="conteudo-senha mb-8 bg-[#0d1117] p-4 md:p-6 rounded-2xl border-2 border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-inner">
+            <div class="w-full overflow-x-auto">
+                <label for="campo-senha" class="block text-xs uppercase tracking-wider text-cyan-400 font-bold mb-1">
+                    Sua Senha Ultra Secreta 🗝️
+                </label>
+                <input name="senha" type="text" id="campo-senha" readonly 
+                    class="fonte-codigo bg-transparent text-pink-400 text-2xl md:text-4xl font-bold w-full outline-none select-all tracking-wider"
+                    placeholder="SuaSenhaAqui!">
+            </div>
+            <div class="flex gap-2 w-full sm:w-auto">
+                <button id="btn-gerar" title="Nova Senha" class="btn-press bg-purple-600 hover:bg-purple-500 text-white font-bold p-3 md:p-4 rounded-xl flex items-center justify-center transition-colors border-2 border-purple-400">
+                    🔄
+                </button>
+                <button id="btn-copiar" title="Copiar Senha" class="btn-press bg-cyan-500 hover:bg-cyan-400 text-gray-900 font-bold px-5 py-3 md:py-4 rounded-xl flex items-center gap-2 transition-colors border-2 border-cyan-300 w-full sm:w-auto justify-center">
+                    <span>📋</span> <span id="texto-copiar" class="text-sm font-bold">Copiar</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="parametro bg-[#21262d] border-2 border-[#30363d] rounded-2xl p-6">
+            <h3 class="parametro-titulo text-2xl font-bold text-yellow-400 mb-6 flex items-center gap-2">
+                ⚙️ Personalize sua senha!
